@@ -5,13 +5,13 @@ const nextConfig = {
     unoptimized: true,
   },
   eslint: {
-    // نادیده گرفتن خطاهای گرامری موقع بیلد
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // نادیده گرفتن خطاهای تایپ‌سکریپت موقع بیلد
     ignoreBuildErrors: true,
   },
+  basePath: "/pooya-os",
+  assetPrefix: "/pooya-os",
 };
 
 module.exports = nextConfig;
