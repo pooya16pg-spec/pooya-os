@@ -73,7 +73,7 @@ const initialWindows: Record<AppID, WindowState> = {
       en: "Interactive Backend Shell (Pooya.CLI)",
     },
     iconName: "Terminal",
-    isOpen: true,
+    isOpen: false,
     isMinimized: false,
     isMaximized: false,
     zIndex: 21,
