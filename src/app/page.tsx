@@ -22,7 +22,7 @@ export default function PooyaOSDesktop() {
       {/* پس‌زمینه والپیپر فضایی یا شیدر نوری */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-45 pointer-events-none transition-transform duration-700"
-        style={{ backgroundImage: "url('/assets/spatial-bg.webp')" }}
+        style={{ backgroundImage: "url('/pooya-os/assets/spatial-bg.webp')" }}
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,240,255,0.14),transparent_45%),radial-gradient(circle_at_80%_75%,rgba(139,92,246,0.14),transparent_50%)] pointer-events-none" />
 
