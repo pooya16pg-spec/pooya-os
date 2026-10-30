@@ -75,7 +75,7 @@ export default function AboutBentoApp() {
         {/* تصویر آواتار یا شیدر جایگزین */}
         <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-2xl overflow-hidden border-2 border-cyan-400/40 shadow-[0_0_30px_rgba(0,240,255,0.2)] shrink-0 bg-gradient-to-tr from-cyan-500/20 via-violet-500/20 to-emerald-500/20 flex items-center justify-center">
           <img
-            src="/assets/pooya-avatar.webp"
+            src="/pooya-os/assets/pooya.webp"
             alt="Pooya Goodarzi"
             className="w-full h-full object-cover"
             onError={(e) => {
