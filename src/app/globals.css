@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-obsidian text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-200 overflow-hidden select-none;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* استایل اختصاصی حالت X-Ray برای نمایش اسکلت مهندسی به کارفرما */
+.xray-active *[data-xray-label] {
+  outline: 1px dashed rgba(56, 189, 248, 0.65) !important;
+  position: relative;
+}
+
+.xray-active *[data-xray-label]::after {
+  content: attr(data-xray-label);
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  background: rgba(2, 132, 199, 0.9);
+  color: #fff;
+  font-family: monospace;
+  font-size: 9px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 9999;
+  letter-spacing: 0.04em;
+}
+
+/* اسکرول‌بار ظریف مخصوص پنجره‌های سیستم‌عامل */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.5);
+}
