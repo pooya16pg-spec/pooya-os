@@ -22,7 +22,7 @@ export default function TerminalApp() {
       type: "output",
       lines: [
         "Pooya.OS Kernel v4.2.0-spatial — Full-Stack Interactive Shell",
-        "Connected to /api/system backend endpoint. Type 'help' or click a command chip below:",
+        "Connected to Hybrid Edge Engine. Type 'help' or click a command chip below:",
       ],
     },
   ]);
@@ -32,6 +32,108 @@ export default function TerminalApp() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
+
+  const executeLocalKernel = (cmd: string, currentLang: "fa" | "en") => {
+    switch (cmd) {
+      case "help":
+        return {
+          action: "PRINT",
+          lines:
+            currentLang === "fa"
+              ? [
+                  "دستورات قابل اجرا در هسته Pooya.OS:",
+                  "  whoami  -> نمایش بیوگرافی مهندسی پویا گودرزی",
+                  "  stack   -> لیست کامل مهارت‌های UI/UX، فرانت‌اند و بک‌اند",
+                  "  xray    -> فعال/غیرفعال کردن حالت بازرس مهندسی (X-Ray)",
+                  "  status  -> دریافت تلمتری زنده سیستم",
+                  "  hire    -> دریافت اطلاعات تماس مستقیم و گیت‌هاب",
+                  "  clear   -> پاکسازی صفحه ترمینال",
+                ]
+              : [
+                  "Available Kernel Commands in Pooya.OS:",
+                  "  whoami  -> Display Pooya Goodarzi's engineering profile",
+                  "  stack   -> Full breakdown of UI/UX, Frontend & Backend stack",
+                  "  xray    -> Toggle live X-Ray Design Inspector mode",
+                  "  status  -> Fetch real-time system telemetry",
+                  "  hire    -> Direct contact endpoints & GitHub",
+                  "  clear   -> Clear terminal buffer",
+                ],
+        };
+
+      case "whoami":
+        return {
+          action: "PRINT",
+          lines:
+            currentLang === "fa"
+              ? [
+                  "● نام: پویا گودرزی (Pooya Goodarzi)",
+                  "● تخصص: مهندس کامپیوتر | طراح ارشد UI/UX و توسعه‌دهنده Full-Stack",
+                  "● رویکرد مهندسی: ترکیب زیبایی‌شناسی سطح اول محصول با معماری بک‌اند مقیاس‌پذیر و فرانت‌اند فوق سریع.",
+                ]
+              : [
+                  "● Engineer: Pooya Goodarzi",
+                  "● Discipline: Computer Engineer | Full-Stack Design Engineer (UI/UX + FE + BE)",
+                  "● Philosophy: Bridging pixel-perfect spatial UI/UX with high-throughput backend systems.",
+                ],
+        };
+
+      case "stack":
+        return {
+          action: "PRINT",
+          lines: [
+            "[UI/UX Design] :: Figma Design Systems • Interactive Prototyping • Spatial UI Tokens",
+            "[Front-End]    :: Next.js App Router • React 18 • TypeScript • Tailwind • Framer Motion",
+            "[Back-End]     :: Node.js • REST & WebSockets • PostgreSQL & Prisma • Redis Caching",
+          ],
+        };
+
+      case "status":
+        return {
+          action: "PRINT",
+          lines: [
+            "✔ Edge Kernel       : ONLINE (GitHub Pages CDN + Hybrid Runtime)",
+            "✔ State Engine      : ZUSTAND Reactive Store Ready",
+            "✔ Render Target     : 144Hz High-Refresh Spatial UI",
+            `✔ System Timestamp  : ${new Date().toLocaleTimeString()}`,
+          ],
+        };
+
+      case "xray":
+        return {
+          action: "TOGGLE_XRAY",
+          lines:
+            currentLang === "fa"
+              ? ["✔ حالت بازرس مهندسی (X-Ray Mode) تغییر وضعیت داد."]
+              : ["✔ X-Ray Engineering Inspector mode toggled."],
+        };
+
+      case "hire":
+        return {
+          action: "PRINT",
+          lines:
+            currentLang === "fa"
+              ? [
+                  "🚀 آماده همکاری در پروژه‌های سطح اول (تمام‌وقت / پروژه‌ای / بین‌المللی):",
+                  "  • GitHub   : https://github.com/pooya16pg-spec",
+                  "  • Live OS  : https://pooya16pg-spec.github.io/pooya-os/",
+                ]
+              : [
+                  "🚀 Open for Flagship Engineering & Product Design Roles:",
+                  "  • GitHub   : https://github.com/pooya16pg-spec",
+                  "  • Live OS  : https://pooya16pg-spec.github.io/pooya-os/",
+                ],
+        };
+
+      default:
+        return {
+          action: "PRINT",
+          lines:
+            currentLang === "fa"
+              ? [`دستور '${cmd}' شناخته نشد. عبارت 'help' را تایپ کنید.`]
+              : [`Command '${cmd}' not recognized. Type 'help' for available commands.`],
+        };
+    }
+  };
 
   const runCommand = async (cmdText: string) => {
     const clean = cmdText.trim().toLowerCase();
@@ -50,47 +152,29 @@ export default function TerminalApp() {
     setInput("");
     setLoading(true);
 
-    try {
-      const res = await fetch("/api/system", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ command: clean, lang }),
-      });
-      const data = await res.json();
-
-      if (data.action === "TOGGLE_XRAY") {
+    setTimeout(() => {
+      const result = executeLocalKernel(clean, lang);
+      if (result.action === "TOGGLE_XRAY") {
         toggleXRayMode();
       }
-
       setLogs((prev) => [
         ...prev,
         {
           id: `${Date.now()}-out`,
           type: "output",
-          lines: data.lines || ["Executed successfully."],
+          lines: result.lines,
         },
       ]);
-    } catch {
-      setLogs((prev) => [
-        ...prev,
-        {
-          id: `${Date.now()}-err`,
-          type: "output",
-          lines: ["Error communicating with backend API route."],
-        },
-      ]);
-    } finally {
       setLoading(false);
-    }
+    }, 180);
   };
 
   return (
     <div
       dir="ltr"
-      data-xray-label="TerminalCLI :: Connected to POST /api/system"
+      data-xray-label="TerminalCLI :: Hybrid Edge Shell"
       className="flex flex-col h-full min-h-[340px] bg-slate-950/90 rounded-xl border border-white/10 p-3.5 font-mono text-xs"
     >
-      {/* دکمه‌های دستور سریع برای تجربه عالی در موبایل و دسکتاپ */}
       <div className="flex items-center gap-1.5 flex-wrap pb-3 mb-3 border-b border-white/10">
         <span className="text-[10px] text-slate-400 mr-1 flex items-center gap-1">
           <TerminalIcon className="w-3 h-3 text-emerald-400" />
@@ -107,7 +191,6 @@ export default function TerminalApp() {
         ))}
       </div>
 
-      {/* خروجی دستورات */}
       <div className="flex-1 overflow-y-auto space-y-2.5 pr-1">
         {logs.map((entry) => (
           <div key={entry.id} className="space-y-1">
@@ -128,13 +211,12 @@ export default function TerminalApp() {
         ))}
         {loading && (
           <p className="text-emerald-400 animate-pulse">
-            Executing on Next.js Server Runtime...
+            Executing on Pooya.OS Kernel...
           </p>
         )}
         <div ref={bottomRef} />
       </div>
 
-      {/* ورودی متن */}
       <form
         onSubmit={(e) => {
           e.preventDefault();

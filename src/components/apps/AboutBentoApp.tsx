@@ -82,9 +82,6 @@ export default function AboutBentoApp() {
               e.currentTarget.style.display = "none";
             }}
           />
-          <span className="absolute font-mono text-xs text-cyan-300/80 pointer-events-none">
-            PG.ENG
-          </span>
         </div>
 
         <div className="flex-1 text-center md:text-start space-y-2">

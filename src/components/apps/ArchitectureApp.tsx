@@ -18,7 +18,7 @@ export default function ArchitectureApp() {
       <div className="rounded-2xl p-4 bg-slate-950/70 border border-white/10 flex flex-col md:flex-row items-center gap-4">
         <div className="w-full md:w-48 h-32 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-500/20 via-slate-900 to-violet-500/20 border border-white/10 flex items-center justify-center shrink-0">
           <img
-            src="./assets/architecture-core.webp"
+            src="/pooya-os/assets/architecture-core.webp"
             alt="System Architecture"
             className="w-full h-full object-cover"
             onError={(e) => {
