@@ -3,18 +3,14 @@
 import React, { useState } from "react";
 import { useOSStore } from "@/store/useOSStore";
 import {
-  ArrowUpRight,
   Blocks,
   Code2,
   ExternalLink,
-  Github,
   Server,
   ShieldCheck,
   Sparkles,
   Workflow,
 } from "lucide-react";
-
-type Localized = { fa: string; en: string };
 
 const PROJECTS_DATA = [
   {
@@ -218,7 +214,7 @@ export default function ProjectsApp() {
                 <ExternalLink className="h-3.5 w-3.5" />{copy.live}
               </a>
               <a href={activeProject.source} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3.5 py-2 text-xs text-white hover:bg-white/10">
-                <Github className="h-3.5 w-3.5" />{copy.source}
+                <Code2 className="h-3.5 w-3.5" />{copy.source}
               </a>
             </div>
           </div>
