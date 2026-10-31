@@ -94,3 +94,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* iOS Safari and Android Chrome compact viewport refinements */
+@supports (height: 100dvh) { .pooya-os-viewport { height: 100dvh; } }
+@media (max-width: 380px) { .pooya-os-xray-label { display: none; } }
+@media (hover: none) and (pointer: coarse) { button, a { -webkit-tap-highlight-color: transparent; } }
