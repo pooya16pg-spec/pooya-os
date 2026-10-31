@@ -67,8 +67,8 @@ const initialWindows: Record<AppID, WindowState> = {
   terminal: {
     id: "terminal",
     title: {
-      fa: "ترمینال هوشمند بک‌اند (Pooya.CLI)",
-      en: "Interactive Backend Shell (Pooya.CLI)",
+      fa: "ترمینال محلی مرورگر (Pooya.CLI)",
+      en: "Local Browser CLI Sandbox (Pooya.CLI)",
     },
     iconName: "Terminal",
     isOpen: false,
