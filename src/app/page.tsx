@@ -15,7 +15,7 @@ export default function PooyaOSDesktop() {
 
   return (
     <main
-      className={`relative w-full h-[100dvh] min-h-[100svh] overflow-hidden bg-obsidian select-none ${
+      className={`pooya-os-viewport relative w-full h-[100dvh] min-h-[100svh] overflow-hidden bg-obsidian select-none ${
         isXRayMode ? "xray-active" : ""
       }`}
     >
