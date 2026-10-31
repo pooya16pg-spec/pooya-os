@@ -1,17 +1,13 @@
+const isProd = process.env.NODE_ENV === "production";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
   images: {
     unoptimized: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  basePath: "/pooya-os",
-  assetPrefix: "/pooya-os",
+  basePath: isProd ? "/pooya-os" : "",
+  assetPrefix: isProd ? "/pooya-os" : "",
 };
 
 module.exports = nextConfig;

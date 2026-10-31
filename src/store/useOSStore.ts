@@ -99,7 +99,7 @@ const initialWindows: Record<AppID, WindowState> = {
 export const useOSStore = create<OSStore>((set) => ({
   lang: "fa",
   isXRayMode: false,
-  activeApp: "terminal",
+  activeApp: "about",
   maxZIndex: 22,
   windows: initialWindows,
   telemetry: {

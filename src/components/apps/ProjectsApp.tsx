@@ -51,11 +51,11 @@ const PROJECTS_DATA = [
     impact: "Zero-Conflict Sync for 50+ Concurrent Users",
   },
   {
-    id: "chronolux",
+    id: "lumina-glass",
     badge: "Flagship #4 • 3D E-Commerce",
     title: {
-      fa: "ChronoLux — پلتفرم تجارت الکترونیک سه‌بعدی و سفارشی‌ساز محصول",
-      en: "ChronoLux — Interactive 3D Product Configurator & Headless Commerce",
+      fa: "LuminaGlass — پلتفرم تجارت الکترونیک سه‌بعدی و سفارشی‌ساز محصول",
+      en: "LuminaGlass — Interactive 3D Product Configurator & Headless Commerce",
     },
     uxHighlight: {
       fa: "روایت بصری با اسکرول (Scrollytelling)، تغییر آنی متریال محصول و تسویه‌حساب تک‌صفحه‌ای بدون اصطکاک.",
