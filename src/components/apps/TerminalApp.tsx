@@ -21,8 +21,8 @@ export default function TerminalApp() {
       id: "init",
       type: "output",
       lines: [
-        "Pooya.OS Kernel v4.2.0-spatial — Full-Stack Interactive Shell",
-        "Connected to Hybrid Edge Engine. Type 'help' or click a command chip below:",
+        "Pooya.OS Local CLI — Browser-side command sandbox",
+        "No server shell or backend is connected. Type 'help' or choose a local command:",
       ],
     },
   ]);
@@ -33,7 +33,7 @@ export default function TerminalApp() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
 
-  const executeLocalKernel = (cmd: string, currentLang: "fa" | "en") => {
+  const executeLocalCommand = (cmd: string, currentLang: "fa" | "en") => {
     switch (cmd) {
       case "help":
         return {
@@ -41,20 +41,20 @@ export default function TerminalApp() {
           lines:
             currentLang === "fa"
               ? [
-                  "دستورات قابل اجرا در هسته Pooya.OS:",
+                  "دستورات محلی قابل اجرا در Pooya.OS:",
                   "  whoami  -> نمایش بیوگرافی مهندسی پویا گودرزی",
                   "  stack   -> لیست کامل مهارت‌های UI/UX، فرانت‌اند و بک‌اند",
                   "  xray    -> فعال/غیرفعال کردن حالت بازرس مهندسی (X-Ray)",
-                  "  status  -> دریافت تلمتری زنده سیستم",
+                  "  status  -> نمایش وضعیت محلی مرورگر",
                   "  hire    -> دریافت اطلاعات تماس مستقیم و گیت‌هاب",
                   "  clear   -> پاکسازی صفحه ترمینال",
                 ]
               : [
-                  "Available Kernel Commands in Pooya.OS:",
+                  "Available Local Commands in Pooya.OS:",
                   "  whoami  -> Display Pooya Goodarzi's engineering profile",
                   "  stack   -> Full breakdown of UI/UX, Frontend & Backend stack",
                   "  xray    -> Toggle live X-Ray Design Inspector mode",
-                  "  status  -> Fetch real-time system telemetry",
+                  "  status  -> Show local browser status",
                   "  hire    -> Direct contact endpoints & GitHub",
                   "  clear   -> Clear terminal buffer",
                 ],
@@ -91,10 +91,10 @@ export default function TerminalApp() {
         return {
           action: "PRINT",
           lines: [
-            "✔ Edge Kernel       : ONLINE (GitHub Pages CDN + Hybrid Runtime)",
-            "✔ State Engine      : ZUSTAND Reactive Store Ready",
-            "✔ Render Target     : 144Hz High-Refresh Spatial UI",
-            `✔ System Timestamp  : ${new Date().toLocaleTimeString()}`,
+            "✔ Runtime           : Static GitHub Pages (client-side only)",
+            "✔ UI State          : Local Zustand store ready",
+            "✔ Display           : Browser-managed refresh rate",
+            `✔ Local Time        : ${new Date().toLocaleTimeString()}`,
           ],
         };
 
@@ -147,13 +147,13 @@ export default function TerminalApp() {
 
     setLogs((prev) => [
       ...prev,
-      { id: `${Date.now()}-in`, type: "input", lines: [`pooya@kernel:~$ ${clean}`] },
+      { id: `${Date.now()}-in`, type: "input", lines: [`pooya@local:~$ ${clean}`] },
     ]);
     setInput("");
     setLoading(true);
 
     setTimeout(() => {
-      const result = executeLocalKernel(clean, lang);
+      const result = executeLocalCommand(clean, lang);
       if (result.action === "TOGGLE_XRAY") {
         toggleXRayMode();
       }
@@ -172,7 +172,7 @@ export default function TerminalApp() {
   return (
     <div
       dir="ltr"
-      data-xray-label="TerminalCLI :: Hybrid Edge Shell"
+      data-xray-label="TerminalCLI :: Local Browser Command Sandbox"
       className="flex flex-col h-full min-h-[340px] bg-slate-950/90 rounded-xl border border-white/10 p-3.5 font-mono text-xs"
     >
       <div className="flex items-center gap-1.5 flex-wrap pb-3 mb-3 border-b border-white/10">
@@ -211,7 +211,7 @@ export default function TerminalApp() {
         ))}
         {loading && (
           <p className="text-emerald-400 animate-pulse">
-            Executing on Pooya.OS Kernel...
+            Running local browser command...
           </p>
         )}
         <div ref={bottomRef} />

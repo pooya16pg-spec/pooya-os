@@ -23,9 +23,7 @@ interface OSStore {
   windows: Record<AppID, WindowState>;
   telemetry: {
     fps: number;
-    latency: number;
-    activeVisitors: number;
-    memoryUsage: string;
+    frameMs: number;
   };
   toggleLanguage: () => void;
   toggleXRayMode: () => void;
@@ -69,8 +67,8 @@ const initialWindows: Record<AppID, WindowState> = {
   terminal: {
     id: "terminal",
     title: {
-      fa: "ترمینال هوشمند بک‌اند (Pooya.CLI)",
-      en: "Interactive Backend Shell (Pooya.CLI)",
+      fa: "ترمینال محلی مرورگر (Pooya.CLI)",
+      en: "Local Browser CLI Sandbox (Pooya.CLI)",
     },
     iconName: "Terminal",
     isOpen: false,
@@ -103,10 +101,8 @@ export const useOSStore = create<OSStore>((set) => ({
   maxZIndex: 22,
   windows: initialWindows,
   telemetry: {
-    fps: 144,
-    latency: 14,
-    activeVisitors: 3,
-    memoryUsage: "42.8 MB",
+    fps: 0,
+    frameMs: 0,
   },
 
   toggleLanguage: () =>

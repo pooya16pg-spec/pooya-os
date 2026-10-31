@@ -3,7 +3,7 @@
 import React from "react";
 import { useOSStore } from "@/store/useOSStore";
 import {
-  Figma,
+  PanelsTopLeft,
   Code2,
   Database,
   Sparkles,
@@ -17,7 +17,7 @@ export default function AboutBentoApp() {
   const pillars = [
     {
       tag: "UI / UX & Product Design",
-      icon: Figma,
+      icon: PanelsTopLeft,
       color: "text-cyan-400",
       border: "border-cyan-500/30",
       title:
