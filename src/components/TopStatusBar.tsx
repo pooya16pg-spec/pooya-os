@@ -78,7 +78,7 @@ export default function TopStatusBar() {
   return (
     <header
       data-xray-label="TopStatusBar :: Sticky z-50"
-      className="fixed top-0 inset-x-0 h-11 z-50 px-3 md:px-6 flex items-center justify-between bg-slate-950/75 backdrop-blur-xl border-b border-white/10 text-xs select-none"
+      className="fixed top-0 inset-x-0 h-[calc(2.75rem+env(safe-area-inset-top))] pt-[env(safe-area-inset-top)] z-50 px-2.5 sm:px-3 md:px-6 flex items-center justify-between gap-2 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 text-xs select-none"
     >
       {/* بخش راست/چپ اول: برندینگ هسته سیستم */}
       <div className="flex items-center gap-3">
