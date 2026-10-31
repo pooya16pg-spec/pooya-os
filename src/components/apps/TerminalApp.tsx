@@ -21,8 +21,8 @@ export default function TerminalApp() {
       id: "init",
       type: "output",
       lines: [
-        "Pooya.OS Kernel v4.2.0-spatial — Full-Stack Interactive Shell",
-        "Connected to Hybrid Edge Engine. Type 'help' or click a command chip below:",
+        "Pooya.OS Local CLI — Browser-side command sandbox",
+        "No server shell or backend is connected. Type 'help' or choose a local command:",
       ],
     },
   ]);
@@ -45,7 +45,7 @@ export default function TerminalApp() {
                   "  whoami  -> نمایش بیوگرافی مهندسی پویا گودرزی",
                   "  stack   -> لیست کامل مهارت‌های UI/UX، فرانت‌اند و بک‌اند",
                   "  xray    -> فعال/غیرفعال کردن حالت بازرس مهندسی (X-Ray)",
-                  "  status  -> دریافت تلمتری زنده سیستم",
+                  "  status  -> نمایش وضعیت محلی مرورگر",
                   "  hire    -> دریافت اطلاعات تماس مستقیم و گیت‌هاب",
                   "  clear   -> پاکسازی صفحه ترمینال",
                 ]
@@ -54,7 +54,7 @@ export default function TerminalApp() {
                   "  whoami  -> Display Pooya Goodarzi's engineering profile",
                   "  stack   -> Full breakdown of UI/UX, Frontend & Backend stack",
                   "  xray    -> Toggle live X-Ray Design Inspector mode",
-                  "  status  -> Fetch real-time system telemetry",
+                  "  status  -> Show local browser status",
                   "  hire    -> Direct contact endpoints & GitHub",
                   "  clear   -> Clear terminal buffer",
                 ],
@@ -91,10 +91,10 @@ export default function TerminalApp() {
         return {
           action: "PRINT",
           lines: [
-            "✔ Edge Kernel       : ONLINE (GitHub Pages CDN + Hybrid Runtime)",
-            "✔ State Engine      : ZUSTAND Reactive Store Ready",
-            "✔ Render Target     : 144Hz High-Refresh Spatial UI",
-            `✔ System Timestamp  : ${new Date().toLocaleTimeString()}`,
+            "✔ Runtime           : Static GitHub Pages (client-side only)",
+            "✔ UI State          : Local Zustand store ready",
+            "✔ Display           : Browser-managed refresh rate",
+            `✔ Local Time        : ${new Date().toLocaleTimeString()}`,
           ],
         };
 
@@ -211,7 +211,7 @@ export default function TerminalApp() {
         ))}
         {loading && (
           <p className="text-emerald-400 animate-pulse">
-            Executing on Pooya.OS Kernel...
+            Running local browser command...
           </p>
         )}
         <div ref={bottomRef} />
