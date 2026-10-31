@@ -6,7 +6,6 @@ import {
   ScanEye,
   Globe,
   Activity,
-  Wifi,
   Sparkles,
   TerminalSquare,
 } from "lucide-react";
@@ -40,24 +39,28 @@ export default function TopStatusBar() {
     return () => clearInterval(timer);
   }, [lang]);
 
-  // دریافت پینگ واقعی از API بک‌اند هر 10 ثانیه
+  // Measure the browser's rendered frame rate locally; GitHub Pages has no server telemetry endpoint.
   useEffect(() => {
-    const pingServer = async () => {
-      try {
-        const start = performance.now();
-        const res = await fetch("/api/system");
-        if (res.ok) {
-          const data = await res.json();
-          const rtt = Math.round(performance.now() - start);
-          updateTelemetry({ latency: data.latencyMs || rtt });
-        }
-      } catch {
-        // در صورت آفلاین بودن موقت
+    let frameId = 0;
+    let frameCount = 0;
+    let lastSample = performance.now();
+
+    const sampleFrame = (now: number) => {
+      frameCount += 1;
+      const elapsed = now - lastSample;
+      if (elapsed >= 1000) {
+        updateTelemetry({
+          fps: Math.round((frameCount * 1000) / elapsed),
+          frameMs: Number((elapsed / frameCount).toFixed(1)),
+        });
+        frameCount = 0;
+        lastSample = now;
       }
+      frameId = window.requestAnimationFrame(sampleFrame);
     };
-    pingServer();
-    const interval = setInterval(pingServer, 10000);
-    return () => clearInterval(interval);
+
+    frameId = window.requestAnimationFrame(sampleFrame);
+    return () => window.cancelAnimationFrame(frameId);
   }, [updateTelemetry]);
 
   // میانبر کیبورد Shift + X برای فعال‌سازی X-Ray Mode
@@ -95,7 +98,7 @@ export default function TopStatusBar() {
 
         {/* تلمتری زنده - فقط در دسکتاپ */}
         <div
-          data-xray-label="TelemetryMetrics :: Live API"
+          data-xray-label="TelemetryMetrics :: Browser Frame Monitor"
           className="hidden lg:flex items-center gap-4 text-slate-400 font-mono text-[11px] px-3 py-1 rounded-lg bg-slate-900/60 border border-white/5"
         >
           <span className="flex items-center gap-1.5">
@@ -104,8 +107,8 @@ export default function TopStatusBar() {
           </span>
           <span className="text-slate-700">|</span>
           <span className="flex items-center gap-1.5">
-            <Wifi className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{telemetry.latency}ms API</span>
+            <Activity className="w-3.5 h-3.5 text-cyan-400" />
+            <span>{telemetry.frameMs}ms/frame</span>
           </span>
           <span className="text-slate-700">|</span>
           <span className="flex items-center gap-1 text-slate-300">
