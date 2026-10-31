@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useOSStore, AppID } from "@/store/useOSStore";
 import { X, Minus, Maximize2, Minimize2 } from "lucide-react";
@@ -23,6 +23,19 @@ export default function WindowFrame({ id, children }: WindowFrameProps) {
 
   const win = windows[id];
   const isFocused = activeApp === id;
+  const [isCompactViewport, setIsCompactViewport] = useState(true);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const sync = () => setIsCompactViewport(media.matches);
+    sync();
+    if (media.addEventListener) media.addEventListener("change", sync);
+    else media.addListener(sync);
+    return () => {
+      if (media.removeEventListener) media.removeEventListener("change", sync);
+      else media.removeListener(sync);
+    };
+  }, []);
 
   if (!win.isOpen || win.isMinimized) return null;
 
@@ -31,20 +44,20 @@ export default function WindowFrame({ id, children }: WindowFrameProps) {
       <motion.section
         key={id}
         data-xray-label={`WindowFrame[${id}] :: z-${win.zIndex}`}
-        onMouseDown={() => focusWindow(id)}
+        onPointerDown={() => focusWindow(id)}
         initial={{ opacity: 0, scale: 0.94, y: 24 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.92, y: 20 }}
         transition={{ type: "spring", stiffness: 320, damping: 28 }}
-        drag={!win.isMaximized}
+        drag={!win.isMaximized && !isCompactViewport}
         dragMomentum={false}
         style={{
           zIndex: win.zIndex,
         }}
         className={`fixed flex flex-col overflow-hidden transition-shadow duration-200 ${
           win.isMaximized
-            ? "inset-x-0 top-11 bottom-20 rounded-none"
-            : "inset-x-2 top-14 bottom-20 md:inset-auto md:top-16 md:left-12 lg:left-24 md:w-[760px] md:h-[520px] rounded-2xl"
+            ? "inset-x-0 top-[calc(2.75rem+env(safe-area-inset-top))] bottom-[calc(5.25rem+env(safe-area-inset-bottom))] rounded-none md:top-11 md:bottom-20"
+            : "inset-x-2 top-[calc(3.5rem+env(safe-area-inset-top))] bottom-[calc(5.25rem+env(safe-area-inset-bottom))] rounded-2xl md:inset-auto md:top-16 md:left-12 lg:left-24 md:w-[min(760px,calc(100vw-6rem))] md:h-[min(520px,calc(100dvh-7rem))]"
         } ${
           isFocused
             ? "bg-slate-900/85 border border-cyan-400/35 shadow-[0_25px_70px_-15px_rgba(0,240,255,0.22)]"
@@ -59,11 +72,11 @@ export default function WindowFrame({ id, children }: WindowFrameProps) {
         {/* هدر پنجره */}
         <div
           data-xray-label="WindowHeader :: DragHandle"
-          className="flex items-center justify-between px-4 py-2.5 bg-slate-950/60 border-b border-white/10 cursor-grab active:cursor-grabbing"
+          className="flex items-center justify-between gap-2 px-3 sm:px-4 py-1.5 sm:py-2.5 min-h-12 bg-slate-950/60 border-b border-white/10 cursor-default md:cursor-grab md:active:cursor-grabbing"
         >
           <div className="flex items-center gap-2.5">
             {/* دکمه‌های کنترلی استاندارد سیستم‌عامل */}
-            <div className="flex items-center gap-1.5">
+            <div className="window-chrome-controls flex items-center gap-1.5 shrink-0">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -124,7 +137,7 @@ export default function WindowFrame({ id, children }: WindowFrameProps) {
         {/* محتوای داخلی پنجره */}
         <div
           data-xray-label={`WindowViewport[${id}] :: Scrollable`}
-          className="flex-1 overflow-y-auto p-4 md:p-6 select-text"
+          className="window-scroll-viewport flex-1 min-h-0 overflow-y-auto overscroll-contain p-3 sm:p-4 md:p-6 select-text"
         >
           {children}
         </div>
