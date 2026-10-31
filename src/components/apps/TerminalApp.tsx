@@ -33,7 +33,7 @@ export default function TerminalApp() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
 
-  const executeLocalKernel = (cmd: string, currentLang: "fa" | "en") => {
+  const executeLocalCommand = (cmd: string, currentLang: "fa" | "en") => {
     switch (cmd) {
       case "help":
         return {
@@ -41,7 +41,7 @@ export default function TerminalApp() {
           lines:
             currentLang === "fa"
               ? [
-                  "دستورات قابل اجرا در هسته Pooya.OS:",
+                  "دستورات محلی قابل اجرا در Pooya.OS:",
                   "  whoami  -> نمایش بیوگرافی مهندسی پویا گودرزی",
                   "  stack   -> لیست کامل مهارت‌های UI/UX، فرانت‌اند و بک‌اند",
                   "  xray    -> فعال/غیرفعال کردن حالت بازرس مهندسی (X-Ray)",
@@ -50,7 +50,7 @@ export default function TerminalApp() {
                   "  clear   -> پاکسازی صفحه ترمینال",
                 ]
               : [
-                  "Available Kernel Commands in Pooya.OS:",
+                  "Available Local Commands in Pooya.OS:",
                   "  whoami  -> Display Pooya Goodarzi's engineering profile",
                   "  stack   -> Full breakdown of UI/UX, Frontend & Backend stack",
                   "  xray    -> Toggle live X-Ray Design Inspector mode",
@@ -147,13 +147,13 @@ export default function TerminalApp() {
 
     setLogs((prev) => [
       ...prev,
-      { id: `${Date.now()}-in`, type: "input", lines: [`pooya@kernel:~$ ${clean}`] },
+      { id: `${Date.now()}-in`, type: "input", lines: [`pooya@local:~$ ${clean}`] },
     ]);
     setInput("");
     setLoading(true);
 
     setTimeout(() => {
-      const result = executeLocalKernel(clean, lang);
+      const result = executeLocalCommand(clean, lang);
       if (result.action === "TOGGLE_XRAY") {
         toggleXRayMode();
       }
@@ -172,7 +172,7 @@ export default function TerminalApp() {
   return (
     <div
       dir="ltr"
-      data-xray-label="TerminalCLI :: Hybrid Edge Shell"
+      data-xray-label="TerminalCLI :: Local Browser Command Sandbox"
       className="flex flex-col h-full min-h-[340px] bg-slate-950/90 rounded-xl border border-white/10 p-3.5 font-mono text-xs"
     >
       <div className="flex items-center gap-1.5 flex-wrap pb-3 mb-3 border-b border-white/10">
