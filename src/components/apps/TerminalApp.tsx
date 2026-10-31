@@ -10,7 +10,7 @@ interface LogEntry {
   lines: string[];
 }
 
-const QUICK_COMMANDS = ["help", "whoami", "stack", "status", "xray", "hire", "clear"];
+const QUICK_COMMANDS = ["help", "whoami", "stack", "projects", "status", "xray", "hire", "clear"];
 
 export default function TerminalApp() {
   const { lang, toggleXRayMode } = useOSStore();
@@ -45,6 +45,7 @@ export default function TerminalApp() {
                   "  whoami  -> نمایش بیوگرافی مهندسی پویا گودرزی",
                   "  stack   -> لیست کامل مهارت‌های UI/UX، فرانت‌اند و بک‌اند",
                   "  xray    -> فعال/غیرفعال کردن حالت بازرس مهندسی (X-Ray)",
+                  "  projects -> فهرست چهار پروژه و لینک اجرای آن‌ها",
                   "  status  -> نمایش وضعیت محلی مرورگر",
                   "  hire    -> دریافت اطلاعات تماس مستقیم و گیت‌هاب",
                   "  clear   -> پاکسازی صفحه ترمینال",
@@ -52,8 +53,9 @@ export default function TerminalApp() {
               : [
                   "Available Local Commands in Pooya.OS:",
                   "  whoami  -> Display Pooya Goodarzi's engineering profile",
-                  "  stack   -> Full breakdown of UI/UX, Frontend & Backend stack",
+                  "  stack   -> Current UI, frontend, and browser architecture stack",
                   "  xray    -> Toggle live X-Ray Design Inspector mode",
+                  "  projects -> List the four live project URLs",
                   "  status  -> Show local browser status",
                   "  hire    -> Direct contact endpoints & GitHub",
                   "  clear   -> Clear terminal buffer",
@@ -67,13 +69,13 @@ export default function TerminalApp() {
             currentLang === "fa"
               ? [
                   "● نام: پویا گودرزی (Pooya Goodarzi)",
-                  "● تخصص: مهندس کامپیوتر | طراح ارشد UI/UX و توسعه‌دهنده Full-Stack",
-                  "● رویکرد مهندسی: ترکیب زیبایی‌شناسی سطح اول محصول با معماری بک‌اند مقیاس‌پذیر و فرانت‌اند فوق سریع.",
+                  "● وضعیت: دانشجوی مهندسی کامپیوتر و سازندهٔ محصولات وب تعاملی",
+                  "● رویکرد: ترکیب طراحی محصول، پیاده‌سازی فرانت‌اند و شفافیت دربارهٔ قابلیت‌های واقعی.",
                 ]
               : [
                   "● Engineer: Pooya Goodarzi",
-                  "● Discipline: Computer Engineer | Full-Stack Design Engineer (UI/UX + FE + BE)",
-                  "● Philosophy: Bridging pixel-perfect spatial UI/UX with high-throughput backend systems.",
+                  "● Focus: Computer Engineering student building interactive web products",
+                  "● Approach: Product design, frontend engineering, and honest capability boundaries.",
                 ],
         };
 
@@ -82,8 +84,19 @@ export default function TerminalApp() {
           action: "PRINT",
           lines: [
             "[UI/UX Design] :: Figma Design Systems • Interactive Prototyping • Spatial UI Tokens",
-            "[Front-End]    :: Next.js App Router • React 18 • TypeScript • Tailwind • Framer Motion",
+            "[Front-End]    :: Next.js 16 • React 19 • TypeScript • Tailwind • Zustand",
             "[Back-End]     :: Node.js • REST & WebSockets • PostgreSQL & Prisma • Redis Caching",
+          ],
+        };
+
+      case "projects":
+        return {
+          action: "PRINT",
+          lines: [
+            "Pooya.OS     https://pooya16pg-spec.github.io/pooya-os/",
+            "AuraPulse    https://pooya16pg-spec.github.io/aurapulse/",
+            "NexusCanvas  https://pooya16pg-spec.github.io/nexus-canvas/",
+            "LuminaGlass  https://pooya16pg-spec.github.io/lumina-glass/",
           ],
         };
 
@@ -211,7 +224,7 @@ export default function TerminalApp() {
         ))}
         {loading && (
           <p className="text-emerald-400 animate-pulse">
-            Running local browser command...
+            Running local command...
           </p>
         )}
         <div ref={bottomRef} />
@@ -225,7 +238,7 @@ export default function TerminalApp() {
         className="mt-3 pt-2.5 border-t border-white/10 flex items-center gap-2"
       >
         <span className="text-emerald-400 font-bold shrink-0">
-          pooya@kernel:~$
+          pooya@local:~$
         </span>
         <input
           type="text"

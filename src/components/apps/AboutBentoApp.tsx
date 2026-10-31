@@ -27,8 +27,8 @@ export default function AboutBentoApp() {
       desc:
         lang === "fa"
           ? "طراحی وایرفریم، دیزاین توکن‌های مقیاس‌پذیر در Figma، میکرو-اینتراکشن‌های ۶۰/۱۴۴ هرتز و معماری اطلاعات کاربرمحور."
-          : "Crafting scalable Figma token architectures, high-refresh micro-interactions, and conversion-focused user journeys.",
-      metrics: ["Figma Auto-Layout", "WCAG AAA Accessibility", "Interactive Prototypes"],
+          : "Design systems, interaction flows, Figma Auto Layout, and accessible product interfaces grounded in real user tasks.",
+      metrics: ["Figma Auto Layout", "Design Tokens", "Interactive Prototypes"],
     },
     {
       tag: "Modern Front-End Engineering",
@@ -41,9 +41,9 @@ export default function AboutBentoApp() {
           : "High-Frequency Front-End Architecture",
       desc:
         lang === "fa"
-          ? "پیاده‌سازی پیکسل‌به‌پیکسل با React 18، Next.js App Router، TypeScript، انیمیشن‌های فیزیکی Framer Motion و گرافیک WebGL."
-          : "Pixel-perfect execution with Next.js SSR, strict TypeScript, Zustand state machines, and hardware-accelerated motion.",
-      metrics: ["Next.js 14/15 SSR", "TypeScript Strict", "100% Core Web Vitals"],
+          ? "پیاده‌سازی رابط‌های واکنش‌گرا با React 19، Next.js 16، TypeScript، Tailwind CSS و گرافیک SVG/Canvas."
+          : "Responsive interfaces with Next.js 16, React 19, TypeScript, Zustand, Tailwind CSS, and browser-native graphics.",
+      metrics: ["Next.js 16 + React 19", "TypeScript", "Responsive UI"],
     },
     {
       tag: "Scalable Back-End & APIs",
@@ -56,9 +56,9 @@ export default function AboutBentoApp() {
           : "Resilient Back-End & Real-Time Core",
       desc:
         lang === "fa"
-          ? "طراحی APIهای امن و سریع با Node.js، دیتابیس‌های رابطه‌ای PostgreSQL، کشینگ Redis و ارتباط زنده WebSockets."
-          : "Engineering low-latency REST/GraphQL APIs, PostgreSQL schemas, Redis caching layers, and real-time WebSocket streams.",
-      metrics: ["Node.js & REST/WS", "PostgreSQL & Prisma", "Redis Sub-15ms Cache"],
+          ? "شناخت مرزهای کلاینت و سرور، طراحی قرارداد API، مدل‌سازی داده و انتخاب الگوی مناسب برای ارتباط و ذخیره‌سازی."
+          : "Understanding API contracts, data modeling, caching, and real-time communication patterns—without presenting unimplemented services as live infrastructure.",
+      metrics: ["API Design", "Data Modeling", "Client / Server Boundaries"],
     },
   ];
 
@@ -96,14 +96,14 @@ export default function AboutBentoApp() {
 
           <h1 className="text-xl md:text-2xl font-bold text-white">
             {lang === "fa"
-              ? "پویا گودرزی — مهندس کامپیوتر"
-              : "Pooya Goodarzi — Computer Engineer"}
+              ? "پویا گودرزی — دانشجوی مهندسی کامپیوتر"
+              : "Pooya Goodarzi — Computer Engineering Student"}
           </h1>
 
           <p className="text-xs md:text-sm text-slate-300 leading-relaxed">
             {lang === "fa"
-              ? "من مرز بین طراح محصول (UI/UX) و مهندس نرم‌افزار (Front-End / Back-End) را از بین برده‌ام. به جای تحویل طرح‌های ایستا یا کدهای بی‌روح، محصولات دیجیتالی می‌سازم که هم در زیبایی بصری خیره‌کننده‌اند و هم در معماری فنی بی‌نقص کار می‌کنند."
-              : "Bridging the gap between Principal UI/UX Design and Full-Stack Software Engineering. I architect products that combine spatial visual polish with battle-tested backend scalability."}
+              ? "من روی تبدیل ایده به محصول وب قابل استفاده تمرکز می‌کنم: از طراحی تجربه و سیستم بصری تا پیاده‌سازی رابط، مدیریت وضعیت و بررسی محدودیت‌های واقعی استقرار."
+              : "I enjoy turning product ideas into usable web experiences, connecting visual systems, interface engineering, state management, and honest deployment constraints."}
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-center md:justify-start gap-2.5">
@@ -123,7 +123,7 @@ export default function AboutBentoApp() {
               onClick={() => openWindow("terminal")}
               className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 text-xs font-mono transition-all"
             >
-              {lang === "fa" ? "اجرای ترمینال بک‌اند" : "Launch Backend CLI"}
+              {lang === "fa" ? "اجرای ترمینال محلی" : "Launch Local CLI"}
             </button>
           </div>
         </div>

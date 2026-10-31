@@ -3,23 +3,24 @@
 **Author:** Pooya Goodarzi  
 **Live site:** https://pooya16pg-spec.github.io/pooya-os/
 
-Pooya.OS is a client-side portfolio experience built to present four interactive engineering projects through a desktop-inspired interface.
+Pooya.OS is a browser-based engineering portfolio presented as a desktop workspace. It brings project case studies, a local command sandbox, a design-token inspector, and a small window manager into one responsive interface.
 
-## What is included
-- Draggable application windows, responsive dock, language switching, and an X-Ray inspection mode.
-- A local CLI sandbox with informational commands. It does not execute operating-system commands and does not connect to a backend shell.
-- Browser frame-rate sampling using `requestAnimationFrame`; reported FPS and frame time are measured locally in the current browser tab.
-- Project summaries that distinguish real browser functionality from simulated or local-only features.
+## Explore the workspace
+- **Engineer profile:** product design, frontend engineering, and systems-thinking focus.
+- **Product case studies:** four projects with problem statements, technical approaches, practical things to try, and direct source/demo links.
+- **Local CLI:** `help`, `whoami`, `stack`, `projects`, `status`, `xray`, and `hire`. Commands run in the browser; they do not execute shell commands.
+- **Architecture & tokens:** the design palette and runtime boundaries, with X-Ray labels for interface inspection.
+- **Frame monitor:** browser-side `requestAnimationFrame` sampling. FPS and frame time describe this tab, not server latency.
 
-## Deployment and architecture
-- Next.js 14, React 18, TypeScript, Zustand, and Tailwind CSS.
-- Built with Next.js static export and deployed on GitHub Pages.
-- No Next.js server runtime, API route, database, authentication service, or server telemetry is available in this deployment.
-- Public assets are served from the `/pooya-os` base path.
+## Architecture
+- Next.js 16 static export, React 19, TypeScript, Zustand, Tailwind CSS, and Framer Motion.
+- Hosted on GitHub Pages under `/pooya-os`.
+- No server runtime, API route, account system, database, or backend shell is included in this deployment.
+- State is client-side and resets with the browser session unless a feature explicitly says otherwise.
 
 ## Project ecosystem
-- **AuraPulse:** browser-based market dashboard and paper-trading simulation. It can read public Binance market data when the browser can reach the public endpoint; it never places real exchange orders.
-- **NexusCanvas:** local architecture graph editor with same-browser-tab synchronization and a Docker Compose prototype exporter.
-- **LuminaGlass:** browser-native visual experiments and Web Audio DSP, including uploaded audio and optional microphone input.
+- **AuraPulse:** public read-only Binance tickers where reachable, plus an in-browser paper-trading simulator.
+- **NexusCanvas:** a local architecture graph editor with topology analysis and a Docker Compose starter export.
+- **LuminaGlass:** SVG-based optical controls, PNG export, browser-native Web Audio processing, and a local task board.
 
-All trading, topology metrics, and visual presets are demonstrations unless a feature explicitly identifies an external public data source.
+The interface distinguishes external public data from illustrative metrics and local-only behavior. It is a portfolio demonstration, not a hosted SaaS backend.
