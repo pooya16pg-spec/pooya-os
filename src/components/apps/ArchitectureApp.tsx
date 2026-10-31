@@ -7,10 +7,10 @@ export default function ArchitectureApp() {
   const { lang, isXRayMode, toggleXRayMode } = useOSStore();
 
   const tokens = [
-    { name: "--spatial-cyan", hex: "#00F0FF", role: "Primary Interactive & Focus" },
+    { name: "--spatial-cyan", hex: "#00F0FF", role: "Primary Actions & Keyboard Focus" },
     { name: "--spatial-violet", hex: "#8B5CF6", role: "Design System Accents" },
-    { name: "--spatial-emerald", hex: "#10B981", role: "Live Backend Telemetry" },
-    { name: "--obsidian-core", hex: "#06080D", role: "Deep OLED Spatial Canvas" },
+    { name: "--spatial-emerald", hex: "#10B981", role: "Status & Local Interaction Accent" },
+    { name: "--obsidian-core", hex: "#06080D", role: "Dark Workspace Surface" },
   ];
 
   return (
@@ -30,12 +30,12 @@ export default function ArchitectureApp() {
           <h3 className="text-base font-bold text-white">
             {lang === "fa"
               ? "معماری هسته Pooya.OS و دیزاین توکن‌ها"
-              : "Pooya.OS Kernel & Design Token Specification"}
+              : "Pooya.OS Client Runtime & Design Tokens"}
           </h3>
           <p className="text-xs text-slate-300 leading-relaxed">
             {lang === "fa"
-              ? "این سیستم با الگوی Atomic Design در لایه UI و معماری State-Driven در لایه فرانت‌اند و بک‌اند طراحی شده است. برای مشاهده مرز کامپوننت‌ها در لحظه، حالت X-Ray را فعال کنید."
-              : "Engineered with Atomic Design tokens on the surface and a unified Zustand + Next.js Edge API kernel underneath."}
+              ? "این نسخه یک خروجی استاتیک Next.js روی GitHub Pages است. وضعیت پنجره‌ها و تعاملات در مرورگر مدیریت می‌شوند و تلمتری، نرخ فریم همان تب را اندازه می‌گیرد. برای مشاهده برچسب‌های اجزای رابط، X-Ray را روشن کنید."
+              : "A static Next.js export on GitHub Pages. Window state and interactions stay in the browser; the frame monitor samples this tab's rendering cadence."}
           </p>
           <button
             onClick={toggleXRayMode}
