@@ -49,9 +49,9 @@ export default function AdaptiveDock() {
   return (
     <nav
       data-xray-label="AdaptiveDock :: Floating Spatial Bar"
-      className="fixed bottom-3 inset-x-0 z-50 flex justify-center px-3 pointer-events-none"
+      className="fixed bottom-[calc(0.5rem+env(safe-area-inset-bottom))] inset-x-0 z-50 flex justify-center px-2 pointer-events-none"
     >
-      <div className="pointer-events-auto flex items-center gap-2 sm:gap-3 px-3 py-2 rounded-2xl bg-slate-950/80 backdrop-blur-2xl border border-white/15 shadow-[0_15px_50px_rgba(0,0,0,0.75)]">
+      <div className="pointer-events-auto max-w-full overflow-x-auto flex items-center gap-1.5 sm:gap-3 px-2 sm:px-3 py-2 rounded-2xl bg-slate-950/80 backdrop-blur-2xl border border-white/15 shadow-[0_15px_50px_rgba(0,0,0,0.75)]">
         {DOCK_ITEMS.map((item) => {
           const Icon = item.icon;
           const isOpen = windows[item.id].isOpen && !windows[item.id].isMinimized;
@@ -61,7 +61,7 @@ export default function AdaptiveDock() {
             <button
               key={item.id}
               onClick={() => openWindow(item.id)}
-              className="group relative flex flex-col items-center"
+              aria-label={item.label[lang]} className="group relative flex flex-col items-center shrink-0 min-w-11 min-h-11 justify-center"
             >
               {/* تولتیپ عنوان در دسکتاپ */}
               <span className="hidden md:block absolute -top-9 px-2.5 py-1 rounded-lg bg-slate-900/95 border border-white/10 text-[11px] text-slate-200 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg">
@@ -98,7 +98,8 @@ export default function AdaptiveDock() {
         {/* دکمه دسترسی سریع شست به X-Ray در موبایل و دسکتاپ */}
         <button
           onClick={toggleXRayMode}
-          className="group relative flex flex-col items-center"
+          aria-label={lang === "fa" ? "حالت X-Ray" : "X-Ray mode"}
+          className="group relative flex flex-col items-center shrink-0 min-w-11 min-h-11 justify-center"
         >
           <div
             className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center transition-all border ${

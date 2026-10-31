@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#06080D" };
+
 export const metadata: Metadata = {
-  title: "Pooya Goodarzi | Pooya.OS — Full-Stack & UI/UX Engineer",
+  title: "Pooya Goodarzi | Pooya.OS — Interactive Engineering Portfolio",
   description:
-    "Interactive Spatial Portfolio of Pooya Goodarzi — Computer Engineer, Senior UI/UX Designer & Full-Stack Developer.",
+    "Interactive engineering portfolio by Pooya Goodarzi, featuring responsive case studies, a browser-local desktop and design-system inspector.",
 };
 
 export default function RootLayout({
