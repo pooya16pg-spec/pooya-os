@@ -67,6 +67,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 button, a, input, textarea, select { touch-action: manipulation; }
+input, textarea, select { font-size: 16px; }
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
   outline: 2px solid rgba(34, 211, 238, 0.9);
   outline-offset: 3px;
