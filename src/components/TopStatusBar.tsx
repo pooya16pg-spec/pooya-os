@@ -133,7 +133,7 @@ export default function TopStatusBar() {
           }`}
         >
           <ScanEye className="w-3.5 h-3.5 text-cyan-400" />
-          <span>{lang === "fa" ? "حالت X-Ray" : "X-Ray Mode"}</span>
+          <span className="pooya-os-xray-label">{lang === "fa" ? "حالت X-Ray" : "X-Ray Mode"}</span>
           <span className="hidden md:inline text-[10px] opacity-70 font-mono">
             [Shift+X]
           </span>
