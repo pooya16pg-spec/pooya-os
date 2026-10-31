@@ -8,7 +8,6 @@ import {
   Code2,
   ExternalLink,
   Github,
-  Layers,
   Server,
   ShieldCheck,
   Sparkles,
