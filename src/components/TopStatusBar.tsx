@@ -17,6 +17,7 @@ export default function TopStatusBar() {
     telemetry,
     toggleLanguage,
     toggleXRayMode,
+    updateTelemetry,
     openWindow,
   } = useOSStore();
 
