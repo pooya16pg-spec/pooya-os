@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useOSStore } from "@/store/useOSStore";
 import TopStatusBar from "@/components/TopStatusBar";
 import AdaptiveDock from "@/components/AdaptiveDock";
@@ -12,6 +12,30 @@ import ArchitectureApp from "@/components/apps/ArchitectureApp";
 
 export default function PooyaOSDesktop() {
   const { isXRayMode, lang, openWindow } = useOSStore();
+
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      const height = window.visualViewport?.height ?? window.innerHeight;
+      document.documentElement.style.setProperty("--pooya-os-viewport-height", `${Math.round(height)}px`);
+    };
+
+    updateViewportHeight();
+    window.visualViewport?.addEventListener("resize", updateViewportHeight);
+    window.addEventListener("resize", updateViewportHeight);
+    window.addEventListener("orientationchange", updateViewportHeight);
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", updateViewportHeight);
+      window.removeEventListener("resize", updateViewportHeight);
+      window.removeEventListener("orientationchange", updateViewportHeight);
+      document.documentElement.style.removeProperty("--pooya-os-viewport-height");
+    };
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = lang === "fa" ? "fa" : "en";
+    document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+  }, [lang]);
 
   return (
     <main

@@ -39,13 +39,22 @@ export default function TopStatusBar() {
     return () => clearInterval(timer);
   }, [lang]);
 
-  // Measure the browser's rendered frame rate locally; GitHub Pages has no server telemetry endpoint.
+  // Measure frame pacing only on desktop; avoid a permanent animation loop on phones.
   useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 1024px) and (pointer: fine)");
     let frameId = 0;
     let frameCount = 0;
-    let lastSample = performance.now();
+    let lastSample = 0;
+    let running = false;
+
+    const stop = () => {
+      if (running) window.cancelAnimationFrame(frameId);
+      running = false;
+      updateTelemetry({ fps: 0, frameMs: 0 });
+    };
 
     const sampleFrame = (now: number) => {
+      if (!running || document.hidden) return;
       frameCount += 1;
       const elapsed = now - lastSample;
       if (elapsed >= 1000) {
@@ -59,8 +68,28 @@ export default function TopStatusBar() {
       frameId = window.requestAnimationFrame(sampleFrame);
     };
 
-    frameId = window.requestAnimationFrame(sampleFrame);
-    return () => window.cancelAnimationFrame(frameId);
+    const start = () => {
+      if (running || !desktopQuery.matches || document.hidden) return;
+      running = true;
+      frameCount = 0;
+      lastSample = performance.now();
+      frameId = window.requestAnimationFrame(sampleFrame);
+    };
+
+    const syncActivity = () => {
+      if (desktopQuery.matches && !document.hidden) start();
+      else stop();
+    };
+
+    desktopQuery.addEventListener("change", syncActivity);
+    document.addEventListener("visibilitychange", syncActivity);
+    syncActivity();
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      desktopQuery.removeEventListener("change", syncActivity);
+      document.removeEventListener("visibilitychange", syncActivity);
+    };
   }, [updateTelemetry]);
 
   // میانبر کیبورد Shift + X برای فعال‌سازی X-Ray Mode

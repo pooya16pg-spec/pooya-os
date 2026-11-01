@@ -54,7 +54,7 @@ export default function WindowFrame({ id, children }: WindowFrameProps) {
         style={{
           zIndex: win.zIndex,
         }}
-        className={`fixed flex flex-col overflow-hidden transition-shadow duration-200 ${
+        className={`absolute flex flex-col overflow-hidden transition-shadow duration-200 ${
           win.isMaximized
             ? "inset-x-0 top-[calc(2.75rem+env(safe-area-inset-top))] bottom-[calc(5.25rem+env(safe-area-inset-bottom))] rounded-none md:top-11 md:bottom-20"
             : "inset-x-2 top-[calc(3.5rem+env(safe-area-inset-top))] bottom-[calc(5.25rem+env(safe-area-inset-bottom))] rounded-2xl md:inset-auto md:top-16 md:left-12 lg:left-24 md:w-[min(760px,calc(100vw-6rem))] md:h-[min(520px,calc(100dvh-7rem))]"

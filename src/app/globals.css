@@ -99,3 +99,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @supports (height: 100dvh) { .pooya-os-viewport { height: 100dvh; } }
 @media (max-width: 380px) { .pooya-os-xray-label { display: none; } }
 @media (hover: none) and (pointer: coarse) { button, a { -webkit-tap-highlight-color: transparent; } }
+
+@media (hover: none) and (pointer: coarse) {
+  button, [role="button"] { min-height: 44px; }
+  input:not([type="range"]), textarea, select { min-height: 44px; font-size: 16px; }
+  input[type="range"] { min-height: 44px; padding-block: 12px; }
+  .window-chrome-controls button { width: 44px !important; height: 44px !important; min-width: 44px !important; min-height: 44px !important; }
+}
+@media (max-width: 767px) { .window-chrome-controls button:first-child { display: none !important; } }
+@supports (height: 100dvh) { .pooya-os-viewport { height: var(--pooya-os-viewport-height, 100dvh); min-height: var(--pooya-os-viewport-height, 100dvh); } }
