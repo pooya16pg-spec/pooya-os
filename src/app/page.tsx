@@ -32,12 +32,12 @@ export default function PooyaOSDesktop() {
     };
   }, []);
 
-  return (
-
   useEffect(() => {
     document.documentElement.lang = lang === "fa" ? "fa" : "en";
     document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
   }, [lang]);
+
+  return (
     <main
       className={`pooya-os-viewport relative w-full h-[100dvh] min-h-[100svh] overflow-hidden bg-obsidian select-none ${
         isXRayMode ? "xray-active" : ""
